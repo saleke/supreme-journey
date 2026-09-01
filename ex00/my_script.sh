@@ -1,40 +1,25 @@
 #!/usr/bin/env bash
 
-echo '=============================================='
-echo '                 Running                      '
-echo '=============================================='
-echo "=== Displaying pip Version ==="
-pip --version
+TARGET_PATH="local_lib"
+PYTHON_SCRIPT="my_program.py"
 
-echo ''
-
-TARGET_PATH='local_lib'
-PYTHON_SCRIPT='my_program.py'
-LOG_FILE='installation.log'
-
-
+echo "====================== Running ============================"
+echo "checking if local $TARGET_PATH exists"
 
 if [ -d "$TARGET_PATH" ]; then
-
-    echo "Existing local_lib folder found. Crushing old install..."
+    echo "found local file $TARGET_PATH"
+    echo "deleting $TARGET_PATH"
 
     rm -rf "$TARGET_PATH"
+    echo "deleted"
 fi
+mkdir "local_lib"
 
-mkdir "$TARGET_PATH"
-echo "Installing the 'path' development version from GitHub..."
-
-pip install --target "$TARGET_PATH" --upgrade --force-reinstall git+https://github.com/jaraco/path > "$LOG_FILE" 2>&1 || exit 1
+echo "====================== Installing path library ============================"
+pip install --target "$TARGET_PATH" --force-reinstall git+https://github.com/jaraco/path > "installation_log.log" 2>&1 || echo "error: failed to install"
 
 if [ $? -eq 0 ]; then
-    echo "Installation successful! Executing your program..."
-    echo "--------------------------------------------------"
-    
-    python3 "$PYTHON_SCRIPT"
-else
-    echo "Error: Installation failed. See '$LOG_FILE' for details."
-    exit 1
+    echo "package installed successfully"
 fi
 
-
-echo "=== Installation Completed successfully! ==="
+python3 "$PYTHON_SCRIPT"
