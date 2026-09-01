@@ -1,4 +1,5 @@
 import sys 
+import antigravity
 
 def get_geohash(latitude, longitude, precision):
 
@@ -9,7 +10,7 @@ def get_geohash(latitude, longitude, precision):
 
     geohash_char = []
     bit_count = 0
-    bitbuffer = 0
+    bit_buffer = 0
 
     is_even_bit = True
 
@@ -19,20 +20,20 @@ def get_geohash(latitude, longitude, precision):
         if is_even_bit:
             mid = (long_range[0] + long_range[1]) / 2
             if longitude >=  mid:
-                bitbuffer = (bitbuffer << 1) | 1
+                bit_buffer = (bitbuffer << 1) | 1
                 long_range[0] = mid
 
             else:
-                bitbuffer = (bitbuffer << 1) | 0
+                bit_buffer = (bitbuffer << 1) | 0
                 long_range[1] = mid
 
         else:
             mid = (lat_range[0] + lat_range[1]) / 2
             if latitude >= mid:
-                bitbuffer = (bitbuffer << 1) | 1
+                bit_buffer = (bitbuffer << 1) | 1
                 lat_range[0] = mid
             else:
-                bitbuffer = (bitbuffer << 1) | 0
+                bit_buffer = (bitbuffer << 1) | 0
                 lat_range[1] = mid
 
         is_even_bit = not is_even_bit
@@ -41,7 +42,7 @@ def get_geohash(latitude, longitude, precision):
         if bit_count == 5:
             geohash_char.append(BASE32_ALPHABET[bitbuffer])
 
-            bitbuffer = 0
+            bit_buffer = 0
             bit_count = 0
 
     return ''.join(geohash_char)
