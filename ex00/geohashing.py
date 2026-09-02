@@ -1,51 +1,52 @@
 import sys 
-import antigravity
+# import antigravity
 
 def get_geohash(latitude, longitude, precision):
 
-    BASE32_ALPHABET = '0123456789bcdefghjkmnpqrstuvwxyz'
+    longitude_range = [-180.0, 180.0]
+    latitude_range = [-90.0, 90.0]
 
-    lat_range = [-90.0, 90.0]
-    long_range = [-180.0, 180.0]
+    BASE32_ALPHABETS = "0123456789bcdefghjkmnpqrstuvwxyz"
 
-    geohash_char = []
-    bit_count = 0
+    geohash = []
     bit_buffer = 0
+    char_count = 0
 
     is_even_bit = True
+    bits_needed = 5 * precision
 
-    total_bits_needed = 5 * precision
-
-    for _ in range(total_bits_needed):
+    for _ in range(bits_needed):
         if is_even_bit:
-            mid = (long_range[0] + long_range[1]) / 2
-            if longitude >=  mid:
-                bit_buffer = (bitbuffer << 1) | 1
-                long_range[0] = mid
+
+            mid = (longitude_range[0] + longitude_range[1]) / 2
+            if longitude >= mid:
+                bit_buffer = (bit_buffer << 1) | 1
+                longitude_range[0] = mid
 
             else:
-                bit_buffer = (bitbuffer << 1) | 0
-                long_range[1] = mid
-
+                bit_buffer = (bit_buffer << 1) | 0
+                longitude_range[1] = mid
         else:
-            mid = (lat_range[0] + lat_range[1]) / 2
+
+            mid = (latitude_range[0] + latitude_range[1]) / 2
             if latitude >= mid:
-                bit_buffer = (bitbuffer << 1) | 1
-                lat_range[0] = mid
+                bit_buffer = (bit_buffer << 1) | 1
+                latitude_range[0] = mid
+
             else:
-                bit_buffer = (bitbuffer << 1) | 0
-                lat_range[1] = mid
+                bit_buffer = (bit_buffer << 1) | 0
+                latitude_range[1] = mid
 
+        char_count += 1
         is_even_bit = not is_even_bit
-        bit_count += 1
 
-        if bit_count == 5:
-            geohash_char.append(BASE32_ALPHABET[bitbuffer])
-
+        if char_count == 5:
+            geohash.append(BASE32_ALPHABETS[bit_buffer])
+            char_count = 0
             bit_buffer = 0
-            bit_count = 0
 
-    return ''.join(geohash_char)
+    return "".join(geohash)
+
 
 
 def main():
