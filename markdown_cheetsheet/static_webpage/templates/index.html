@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Syntax Guide</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --accent: #6366f1;
+            --border: #e2e8f0;
+            --code-bg: #0f172a;
+            --code-text: #38bdf8;
+            --preview-bg: #f1f5f9;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            display: flex;
+            line-height: 1.6;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 240px;
+            height: 100vh;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+
+        nav h1 { font-size: 1.2rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 700; }
+        nav ul { list-style: none; }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: block; padding: 0.4rem 0.5rem; border-radius: 4px; }
+        nav a:hover { background: var(--bg-primary); color: var(--accent); }
+
+        /* Main Section Container */
+        main {
+            margin-left: 240px;
+            max-width: 900px;
+            width: calc(100% - 240px);
+            padding: 2rem;
+        }
+
+        header { margin-bottom: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; }
+        header h2 { font-size: 2rem; color: #1e293b; }
+        header p { color: var(--text-muted); }
+
+        /* Mode Selector Controls */
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 0.4rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .btn.active { background: var(--accent); color: white; }
+
+        /* Main Display Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-container.view-code { grid-template-columns: 1fr; }
+        .grid-container.view-code .preview-card { display: none !important; }
+        .grid-container.view-preview { grid-template-columns: 1fr; }
+        .grid-container.view-preview .code-card { display: none !important; }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            nav { width: 100%; height: auto; position: relative; }
+            main { margin-left: 0; width: 100%; padding: 1rem; }
+            .grid-container { grid-template-columns: 1fr !important; }
+            .grid-container.view-code .preview-card, .grid-container.view-preview .code-card { display: none !important; }
+            .controls { display: none; }
+        }
+
+        /* Card Elements Layout */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            background: var(--bg-primary);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            flex-grow: 1;
+        }
+
+        .preview-block { padding: 1rem; flex-grow: 1; }
+
+        /* Clean Presets for Live Previews */
+        .preview-block h1 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+        .preview-block h2 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+        .preview-block h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .preview-block p { margin-bottom: 0.4rem; }
+        .preview-block ul, .preview-block ol { margin-left: 1.2rem; margin-bottom: 0.4rem; }
+        .preview-block blockquote { border-left: 4px solid var(--accent); padding-left: 0.8rem; color: var(--text-muted); font-style: italic; }
+        .preview-block table { width: 100%; border-collapse: collapse; }
+        .preview-block th, .preview-block td { border: 1px solid var(--border); padding: 0.4rem; text-align: left; }
+        .preview-block th { background: var(--preview-bg); }
+        .preview-block code { background: var(--preview-bg); padding: 0.1rem 0.3rem; border-radius: 3px; font-family: monospace; color: #e11d48; }
+        .preview-block pre { background: var(--code-bg); color: #fff; padding: 0.5rem; border-radius: 4px; overflow-x: auto; margin-top: 0.4rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>Markdown</h1>
+        <ul>
+            <li><a href="#headers">Headers</a></li>
+            <li><a href="#emphasis">Emphasis</a></li>
+            <li><a href="#lists">Lists</a></li>
+            <li><a href="#links">Links & Images</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h2>Markdown Guide</h2>
+            <p>Interactive playground and syntax layout reference tool.</p>
+        </header>
+
+        <div class="controls">
+            <button class="btn active" onclick="setView('split', this)">🖥️ Split</button>
+            <button class="btn" onclick="setView('code', this)">💻 Code</button>
+            <button class="btn" onclick="setView('preview', this)">👁️ Preview</button>
+        </div>
+
+        <!-- Section Headers -->
+        <section id="headers">
+            <div class="grid-container">
+                <div class="card code-card">
+                    <div class="card-header">Source <button class="copy-btn" onclick="copyText(this)">COPY</button></div>
+                    <div class="code-block"># Top Heading
+## Sub Heading
+### Detail</div>
+                </div>
+                <div class="card preview-card">
+                    <div class="card-header">Preview</div>
+                    <div class="preview-block">
+                        <h1>Top Heading</h1>
+                        <h2>Sub Heading</h2>
+                        <h3>Detail</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Emphasis -->
+        <section id="emphasis">
+            <div class="grid-container">
+                <div class="card code-card">
+                    <div class="card-header">Source <button class="copy-btn" onclick="copyText(this)">COPY</button></div>
+                    <div class="code-block">*Italic text*
+**Bold text**
+~~Strikethrough~~</div>
+                </div>
+                <div class="card preview-card">
+                    <div class="card-header">Preview</div>
+                    <div class="preview-block">
+                        <p><i>Italic text</i></p>
+                        <p><b>Bold text</b></p>
+                        <p><del>Strikethrough</del></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Lists -->
+        <section id="lists">
+            <div class="grid-container">
+                <div class="card code-card">
+                    <div class="card-header">Source <button class="copy-btn" onclick="copyText(this)">COPY</button></div>
+                    <div class="code-block">- Item A
+- Item B
+  - Sub Item
+
+1. Step One
+2. Step Two</div>
+                </div>
+                <div class="card preview-card">
+                    <div class="card-header">Preview</div>
+                    <div class="preview-block">
+                        <ul><li>Item A</li><li>Item B<ul><li>Sub Item</li></ul></li></ul>
+                        <ol><li>Step One</li><li>Step Two</li></ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Links -->
+        <section id="links">
+            <div class="grid-container">
+                <div class="card code-card">
+                    <div class="card-header">Source <button class="copy-btn" onclick="copyText(this)">COPY</button></div>
+                    <div class="code-block">[Link Text](https://example.com)
+![Alt Text](https://placeholder.com)</div>
+                </div>
+                <div class="card preview-card">
+                    <div class="card-header">Preview</div>
+                    <div class="preview-block">
+                        <p><a href="#" style="color: var(--accent);">Link Text</a></p>
+                        <img src="https://placeholder.com" alt="Alt" style="margin-top:0.4rem;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Quotes -->
+        <script>
+        // Manages layout mode switcher states
+        function setView(mode, button) {
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            
+            document.querySelectorAll('.grid-container').forEach(grid => {
+                grid.classList.remove('view-code', 'view-preview');
+                if (mode === 'code') grid.classList.add('view-code');
+                if (mode === 'preview') grid.classList.add('view-preview');
+            });
+        }
+
+        // Handles the functional quick copy mechanism
+        function copyText(button) {
+            const codeBlock = button.parentElement.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = "COPIED!";
+                setTimeout(() => { button.textContent = originalText; }, 1500);
+            }).catch(err => {
+                console.error("Could not copy syntax text: ", err);
+            });
+        }
+    </script>
+</body>
+</html>
+

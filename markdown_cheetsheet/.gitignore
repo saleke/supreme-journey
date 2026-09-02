@@ -1,0 +1,72 @@
+# ==============================================================================
+# Django & Python Core
+# ==============================================================================
+*.py[cod]
+*$py.class
+__pycache__/
+.Python
+db.sqlite3
+db.sqlite3-journal
+
+# Distribution / packaging
+downloads/
+plugins/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ==============================================================================
+# Virtual Environments (Add your specific environment folder name here)
+# ==============================================================================
+venv/
+env/
+ENV/
+virtual_env/
+.venv/
+.env/
+
+# ==============================================================================
+# Local Configuration & Sensitive Data (NEVER commit credentials)
+# ==============================================================================
+.env
+.local.env
+.secrets
+secrets.json
+local_settings.py
+
+# ==============================================================================
+# Django Media & Static Directories
+# ==============================================================================
+# Exclude user-uploaded media files gathered during local testing
+/media/
+/static_root/
+/staticfiles/
+
+# ==============================================================================
+# Logs & Databases
+# ==============================================================================
+*.log
+local_db.sqlite3
+
+# ==============================================================================
+# Operating System Artifacts & IDEs
+# ==============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# JetBrains (PyCharm) / VS Code / Cursor
+.idea/
+.vscode/
+.cursor/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
