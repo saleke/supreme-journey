@@ -1,0 +1,23 @@
+Wikipedia is an amazing shared tool you necessarily known. It’s available in your
+favorite browser and as a mobile application. You’re invited to create a tool that will
+allow your to request this now essential website, straight from your terminal.
+To do so, you must design a program named request_wikipedia.py which takes
+a string in parameter and makes a search via the Wikipedia’s API before writing the
+result in the file. You can request the French or English API.
+
+• The program must write a result, even if the request is misspelled. Take the original
+website for an example: if it finds a result for a given request, you program also
+should.
+
+• The result must not be formatted in JSON or Wiki Markup before being written in
+the file.
+
+• The name of the file must be formatted like this: name_of_the_search.wiki and
+must not contain any space.
+
+• In case of parameter absence, wrong parameter, invalid request, information not
+found, server problem or any other problem: no file should be created and a relevant
+error message must be displayed on the console.
+
+• Include requirement.txt file in your repo. It will be used during your evaluation
+to install the libraries necessary to your VirtualEnv program or on the system.
