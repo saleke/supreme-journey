@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Fill the title slot -->
+{% block title %}Django, framework web.{% endblock %}
+
+<!-- Fill the style slot with style1.css (Blue) -->
+{% block style %}
+<link rel="stylesheet" href="{% static 'style1.css' %}">
+{% endblock %}
+
+<!-- Fill the main content slot -->
+{% block content %}
+<h1>Django Web Framework & History</h1>
+<p>Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. It was created in 2003 by web developers Adrian Holovaty and Simon Willison at the Lawrence Journal-World newspaper. It was publicly released under a BSD license in July 2005.</p>
+{% endblock %}

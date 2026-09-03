@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Fill the title slot -->
+{% block title %}Display process of a static page.{% endblock %}
+
+<!-- Fill the style slot with style1.css (Blue) -->
+{% block style %}
+<link rel="stylesheet" href="{% static 'style1.css' %}">
+{% endblock %}
+
+<!-- Fill the main content slot -->
+{% block content %}
+<h1>Process of Displaying a Static Page</h1>
+<ol>
+    <li><strong>The Request:</strong> A user types a URL or clicks a link, sending an HTTP request to the server.</li>
+    <li><strong>The URL Router:</strong> Django inspects the URL match pattern and maps it to a specific Python view function.</li>
+    <li><strong>The View:</strong> The view intercepts the request, processes any logic, and points to the simple HTML template file.</li>
+    <li><strong>The Response:</strong> Django reads the template file, converts it into a static HTML string, and returns it as an HTTP response to the user's browser.</li>
+</ol>
+{% endblock %}

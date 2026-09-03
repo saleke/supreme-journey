@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Web Framework{% endblock %}</title>
+    
+    <!-- This slot lets individual pages plug in their specific CSS sheet just once -->
+    {% block style %}{% endblock %}
+</head>
+<body>
+
+    <!-- This automatically includes the navigation menu bar on every page -->
+    {% include "nav.html" %}
+
+    <main>
+        <!-- This slot is where the unique content of each page will go -->
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

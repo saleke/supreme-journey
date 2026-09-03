@@ -17,8 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from few_pages import views as inner_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.home_handler),
+    path("django", inner_views.django_handler),
+    path("display", inner_views.display_handler),
+    path("templates", inner_views.template_handler)
 ]

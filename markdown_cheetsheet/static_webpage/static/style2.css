@@ -1,0 +1,25 @@
+/* Styling for the red theme page */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    color: #991b1b; /* Dark Red Text */
+    background-color: #fff5f5;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #dc2626; /* Bright Red Links */
+    font-weight: bold;
+}

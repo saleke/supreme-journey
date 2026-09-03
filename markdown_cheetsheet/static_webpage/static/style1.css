@@ -1,0 +1,25 @@
+/* Base styling for the blue theme pages */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    color: #1e3a8a; /* Dark Blue Text */
+    background-color: #f0fdf4; 
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #2563eb; /* Bright Blue Links */
+    font-weight: bold;
+}

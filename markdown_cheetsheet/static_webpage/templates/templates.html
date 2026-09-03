@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Fill the title slot -->
+{% block title %}Template engine.{% endblock %}
+
+<!-- Fill the style slot with style2.css (Red) -->
+{% block style %}
+<link rel="stylesheet" href="{% static 'style2.css' %}">
+{% endblock %}
+
+<!-- Fill the main content slot -->
+{% block content %}
+<h1>The Django Template Engine</h1>
+<p>Django’s default template engine provides an engineered mini-language to dynamically build HTML securely and cleanly. It features:</p>
+
+<ul>
+    <li><strong>Blocks:</strong> Placeholders within parent layouts that child templates can selectively override using <code>{% templatetag openblock %} block name {% templatetag closeblock %}</code> syntax.</li>
+    <li><strong>Loops:</strong> Iterative control structures written as <code>{% templatetag openblock %} for item in list {% templatetag closeblock %}</code> to loop through data lists sequentially.</li>
+    <li><strong>If control structures:</strong> Conditional evaluations using <code>{% templatetag openblock %} if condition {% templatetag closeblock %}</code> to display code fragments selectively.</li>
+    <li><strong>Context variables:</strong> Values dynamically passed from your Python backend into the template wrapper, printed inside double brackets like <code>{% templatetag openvariable %} variable_name {% templatetag closevariable %}</code>.</li>
+</ul>
+{% endblock %}
